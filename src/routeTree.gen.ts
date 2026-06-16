@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StoriesRouteImport } from './routes/stories'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LookbookRouteImport } from './routes/lookbook'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -23,6 +24,11 @@ import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
   path: '/stories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LookbookRoute = LookbookRouteImport.update({
@@ -79,6 +85,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/lookbook': typeof LookbookRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stories': typeof StoriesRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/products/$id': typeof ProductsIdRoute
@@ -91,6 +98,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/lookbook': typeof LookbookRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stories': typeof StoriesRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/products/$id': typeof ProductsIdRoute
@@ -104,6 +112,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/lookbook': typeof LookbookRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stories': typeof StoriesRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/products/$id': typeof ProductsIdRoute
@@ -118,6 +127,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/gallery'
     | '/lookbook'
+    | '/sitemap.xml'
     | '/stories'
     | '/collections/$slug'
     | '/products/$id'
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/gallery'
     | '/lookbook'
+    | '/sitemap.xml'
     | '/stories'
     | '/collections/$slug'
     | '/products/$id'
@@ -142,6 +153,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/gallery'
     | '/lookbook'
+    | '/sitemap.xml'
     | '/stories'
     | '/collections/$slug'
     | '/products/$id'
@@ -155,6 +167,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
   LookbookRoute: typeof LookbookRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StoriesRoute: typeof StoriesRoute
   ProductsIdRoute: typeof ProductsIdRoute
 }
@@ -166,6 +179,13 @@ declare module '@tanstack/react-router' {
       path: '/stories'
       fullPath: '/stories'
       preLoaderRoute: typeof StoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lookbook': {
@@ -254,6 +274,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
   LookbookRoute: LookbookRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   StoriesRoute: StoriesRoute,
   ProductsIdRoute: ProductsIdRoute,
 }
