@@ -9,38 +9,167 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StoriesRouteImport } from './routes/stories'
+import { Route as LookbookRouteImport } from './routes/lookbook'
+import { Route as CollectionsRouteImport } from './routes/collections'
+import { Route as CatalogRouteImport } from './routes/catalog'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsIdRouteImport } from './routes/products.$id'
+import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
 
+const StoriesRoute = StoriesRouteImport.update({
+  id: '/stories',
+  path: '/stories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LookbookRoute = LookbookRouteImport.update({
+  id: '/lookbook',
+  path: '/lookbook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsRoute = CollectionsRouteImport.update({
+  id: '/collections',
+  path: '/collections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogRoute = CatalogRouteImport.update({
+  id: '/catalog',
+  path: '/catalog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsIdRoute = ProductsIdRouteImport.update({
+  id: '/products/$id',
+  path: '/products/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CollectionsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/catalog': typeof CatalogRoute
+  '/collections': typeof CollectionsRouteWithChildren
+  '/lookbook': typeof LookbookRoute
+  '/stories': typeof StoriesRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
+  '/products/$id': typeof ProductsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/catalog': typeof CatalogRoute
+  '/collections': typeof CollectionsRouteWithChildren
+  '/lookbook': typeof LookbookRoute
+  '/stories': typeof StoriesRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
+  '/products/$id': typeof ProductsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/catalog': typeof CatalogRoute
+  '/collections': typeof CollectionsRouteWithChildren
+  '/lookbook': typeof LookbookRoute
+  '/stories': typeof StoriesRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
+  '/products/$id': typeof ProductsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/catalog'
+    | '/collections'
+    | '/lookbook'
+    | '/stories'
+    | '/collections/$slug'
+    | '/products/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/catalog'
+    | '/collections'
+    | '/lookbook'
+    | '/stories'
+    | '/collections/$slug'
+    | '/products/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/catalog'
+    | '/collections'
+    | '/lookbook'
+    | '/stories'
+    | '/collections/$slug'
+    | '/products/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  CatalogRoute: typeof CatalogRoute
+  CollectionsRoute: typeof CollectionsRouteWithChildren
+  LookbookRoute: typeof LookbookRoute
+  StoriesRoute: typeof StoriesRoute
+  ProductsIdRoute: typeof ProductsIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/stories': {
+      id: '/stories'
+      path: '/stories'
+      fullPath: '/stories'
+      preLoaderRoute: typeof StoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lookbook': {
+      id: '/lookbook'
+      path: '/lookbook'
+      fullPath: '/lookbook'
+      preLoaderRoute: typeof LookbookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections': {
+      id: '/collections'
+      path: '/collections'
+      fullPath: '/collections'
+      preLoaderRoute: typeof CollectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalog': {
+      id: '/catalog'
+      path: '/catalog'
+      fullPath: '/catalog'
+      preLoaderRoute: typeof CatalogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +177,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/$id': {
+      id: '/products/$id'
+      path: '/products/$id'
+      fullPath: '/products/$id'
+      preLoaderRoute: typeof ProductsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/$slug': {
+      id: '/collections/$slug'
+      path: '/$slug'
+      fullPath: '/collections/$slug'
+      preLoaderRoute: typeof CollectionsSlugRouteImport
+      parentRoute: typeof CollectionsRoute
+    }
   }
 }
 
+interface CollectionsRouteChildren {
+  CollectionsSlugRoute: typeof CollectionsSlugRoute
+}
+
+const CollectionsRouteChildren: CollectionsRouteChildren = {
+  CollectionsSlugRoute: CollectionsSlugRoute,
+}
+
+const CollectionsRouteWithChildren = CollectionsRoute._addFileChildren(
+  CollectionsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  CatalogRoute: CatalogRoute,
+  CollectionsRoute: CollectionsRouteWithChildren,
+  LookbookRoute: LookbookRoute,
+  StoriesRoute: StoriesRoute,
+  ProductsIdRoute: ProductsIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
