@@ -8,6 +8,7 @@ import {
   getProduct,
   getRelatedProducts,
   formatPrice,
+  type Product,
 } from "@/data/products";
 import { getCollection } from "@/data/collections";
 import { whatsappLink } from "@/data/site";
