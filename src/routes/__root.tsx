@@ -87,7 +87,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Premium handloom sarees, gopi dresses, dhuti, kurtas & traditional collections woven in Mayapur. A heritage fashion house. Worldwide courier available.",
       },
       { name: "author", content: "Jagannath Handloom" },
-      { property: "og:title", content: "Jagannath Handloom — Heritage Woven Into Every Thread" },
+      { property: "og:title", content: "Jagannath Handloom — Heritage Handloom Sarees & Devotional Wear, Mayapur" },
       {
         property: "og:description",
         content:
@@ -95,6 +95,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Jagannath Handloom — Heritage Handloom Sarees & Devotional Wear, Mayapur" },
+      { name: "description", content: "Mayapur Threads is a luxury multi-page website showcasing Jagannath Handloom's heritage fashion." },
+      { property: "og:description", content: "Mayapur Threads is a luxury multi-page website showcasing Jagannath Handloom's heritage fashion." },
+      { name: "twitter:description", content: "Mayapur Threads is a luxury multi-page website showcasing Jagannath Handloom's heritage fashion." },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
