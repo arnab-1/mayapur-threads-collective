@@ -20,7 +20,7 @@ export const Route = createFileRoute("/products/$id")({
     return {
       product,
       related: getRelatedProducts(product),
-      collection: getCollection2(product.collectionSlug),
+      collection: getCollection(product.collectionSlug),
     };
   },
   head: ({ loaderData }) => ({
@@ -82,7 +82,7 @@ function ProductDetail() {
         {/* Gallery */}
         <div className="flex flex-col-reverse gap-4 sm:flex-row">
           <div className="flex gap-3 sm:flex-col">
-            {product.gallery.map((g, i) => (
+            {product.gallery.map((g: string, i: number) => (
               <button
                 key={i}
                 onClick={() => setActiveImg(g)}
@@ -139,7 +139,7 @@ function ProductDetail() {
               Colour {activeColor ? `— ${activeColor}` : ""}
             </p>
             <div className="mt-3 flex gap-3">
-              {product.colors.map((c) => (
+              {product.colors.map((c: { name: string; hex: string }) => (
                 <button
                   key={c.name}
                   onClick={() => setActiveColor(c.name)}
@@ -223,7 +223,7 @@ function ProductDetail() {
             <SectionDivider className="mt-5" />
           </Reveal>
           <div className="mt-12 grid grid-cols-2 gap-x-5 gap-y-12 lg:grid-cols-4">
-            {related.map((p, i) => (
+            {related.map((p: Product, i: number) => (
               <Reveal key={p.id} delay={i % 4} as="div">
                 <ProductCard product={p} index={i} />
               </Reveal>

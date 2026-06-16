@@ -4,7 +4,7 @@ import { Reveal } from "@/components/reveal";
 import { SectionDivider } from "@/components/section-divider";
 import { ProductCard } from "@/components/product-card";
 import { getCollection, collections } from "@/data/collections";
-import { getProductsByCollection } from "@/data/products";
+import { getProductsByCollection, type Product } from "@/data/products";
 import { whatsappLink } from "@/data/site";
 import eyes from "@/assets/jagannath-eyes.png";
 
@@ -114,7 +114,7 @@ function CollectionDetail() {
         </div>
 
         <div className="mt-12 grid grid-cols-2 gap-x-5 gap-y-12 lg:grid-cols-4">
-          {products.map((p, i) => (
+          {products.map((p: Product, i: number) => (
             <Reveal key={p.id} delay={i % 4} as="div">
               <ProductCard product={p} index={i} />
             </Reveal>
