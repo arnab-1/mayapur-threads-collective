@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "framework": "tanstack-start",
+  "builds": [
+    {
+      "src": "dist/server/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/dist/client/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "dist/server/server.js"
+    }
+  ]
+}
